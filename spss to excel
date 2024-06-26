@@ -1,0 +1,17 @@
+library(dplyr)
+library(foreign)
+library(writexl)
+
+# read in file saved in SPSS sav format, export to excel
+
+tab_folder <- "C:\\Temp\\NTS spss\\UKDA-5340-spss\\spss\\spss28\\"
+
+stages <- read.spss(paste0(tab_folder, "stage_eul_2002-2022.sav"),
+                  to.data.frame = TRUE 
+          )
+
+View(head(stages))
+
+write_xlsx(stages %>%
+             filter(SurveyYear == 2022), 
+           "C:/temp/NTS - stages_2022.xlsx")
